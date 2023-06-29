@@ -6,10 +6,7 @@
       "minLength": 1,
       "maxLength": 30,
       "pattern": "^[ \\S+]+$",
-      "examples": [
-        "stablecoin",
-        "compound"
-      ]
+      "examples": ["stablecoin", "compound"]
     },
     "TagDefinition": {
       "type": "object",
@@ -27,10 +24,7 @@
           "pattern": "^[\\w ]+$"
         }
       },
-      "required": [
-        "name",
-        "description"
-      ]
+      "required": ["name", "description"]
     },
     "Version": {
       "type": "object",
@@ -51,11 +45,7 @@
           "maximum": 99
         }
       },
-      "required": [
-        "major",
-        "minor",
-        "patch"
-      ]
+      "required": ["major", "minor", "patch"]
     },
     "ExtensionMap": {
       "type": "object",
@@ -108,13 +98,7 @@
           "$ref": "#/definitions/ExtensionMap"
         }
       },
-      "required": [
-        "chainId",
-        "address",
-        "decimals",
-        "name",
-        "symbol"
-      ]
+      "required": ["chainId", "address", "decimals", "name", "symbol"]
     },
     "TokenList": {
       "type": "object",
@@ -161,44 +145,40 @@
           }
         }
       },
-      "required": [
-        "name",
-        "timestamp",
-        "version",
-        "tokens"
-      ]
+      "required": ["name", "timestamp", "version", "tokens"]
     }
   },
   "examples": [
     {
-  "name": "My Token List",
-  "timestamp": "2023-06-28T00:00:00.000Z",
-  "version": {
-    "major": 1,
-    "minor": 0,
-    "patch": 0
-  },
-  "tokens": [
-    {
-      "chainId": 1,
-      "address": "0xd405df0c8bea464eb52778d49a5c393f652da089",
-      "decimals": 18,
-      "name": "No Value Coin",
-      "symbol": "$NVC"
+      "name": "No Value Coin Token",
+      "timestamp": "2023-06-28T00:00:00.000Z",
+      "version": {
+        "major": 1,
+        "minor": 0,
+        "patch": 0
+      },
+      "tokens": [
+        {
+          "chainId": 1,
+          "address": "0xd405df0c8bea464eb52778d49a5c393f652da089",
+          "decimals": 18,
+          "name": "No Value Coin",
+          "symbol": "$NVC",
+          "tags": ["stablecoin"]
+        }
+      ],
+      "keywords": ["DeFi", "Ethereum"],
+      "logoURI": "https://example.com/list_logo.png",
+      "tags": {
+        "stablecoin": {
+          "name": "Stablecoin",
+          "description": "A token with value pegged to another asset"
+        },
+        "compound": {
+          "name": "Compound",
+          "description": "A token used in Compound Finance"
+        }
+      }
     }
-  ],
-  "keywords": ["DeFi", "Ethereum"],
-  "logoURI": "https://example.com/list_logo.png",
-  "tags": {
-    "stablecoin": {
-      "name": "Stablecoin",
-      "description": "A token with value pegged to another asset"
-    },
-    "compound": {
-      "name": "Compound",
-      "description": "A token used in Compound Finance"
-    }
-  }
-}
   ]
 }
