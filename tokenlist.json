@@ -1,0 +1,204 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "TagIdentifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 30,
+      "pattern": "^[ \\S+]+$",
+      "examples": [
+        "stablecoin",
+        "compound"
+      ]
+    },
+    "TagDefinition": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 30,
+          "pattern": "^[\\w ]+$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[\\w ]+$"
+        }
+      },
+      "required": [
+        "name",
+        "description"
+      ]
+    },
+    "Version": {
+      "type": "object",
+      "properties": {
+        "major": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+        },
+        "minor": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+        },
+        "patch": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+        }
+      },
+      "required": [
+        "major",
+        "minor",
+        "patch"
+      ]
+    },
+    "ExtensionMap": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "TokenInfo": {
+      "type": "object",
+      "properties": {
+        "chainId": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 999999
+        },
+        "address": {
+          "type": "string",
+          "minLength": 42,
+          "maxLength": 42,
+          "pattern": "^0x[a-fA-F0-9]{40}$"
+        },
+        "decimals": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 30,
+          "pattern": "^[\\w ]+$"
+        },
+        "symbol": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 20,
+          "pattern": "^\\S+$"
+        },
+        "logoURI": {
+          "type": "string",
+          "format": "uri"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagIdentifier"
+          },
+          "minItems": 1,
+          "maxItems": 10
+        },
+        "extensions": {
+          "$ref": "#/definitions/ExtensionMap"
+        }
+      },
+      "required": [
+        "chainId",
+        "address",
+        "decimals",
+        "name",
+        "symbol"
+      ]
+    },
+    "TokenList": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 30,
+          "pattern": "^[\\w ]+$"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "version": {
+          "$ref": "#/definitions/Version"
+        },
+        "tokens": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenInfo"
+          },
+          "minItems": 1,
+          "maxItems": 10
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30,
+            "pattern": "^[\\w]+$"
+          },
+          "maxItems": 10
+        },
+        "logoURI": {
+          "type": "string",
+          "format": "uri"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/TagDefinition"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "timestamp",
+        "version",
+        "tokens"
+      ]
+    }
+  },
+  "examples": [
+    {
+  "name": "My Token List",
+  "timestamp": "2023-06-28T00:00:00.000Z",
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  },
+  "tokens": [
+    {
+      "chainId": 1,
+      "address": "0xd405df0c8bea464eb52778d49a5c393f652da089",
+      "decimals": 18,
+      "name": "No Value Coin",
+      "symbol": "$NVC"
+    }
+  ],
+  "keywords": ["DeFi", "Ethereum"],
+  "logoURI": "https://example.com/list_logo.png",
+  "tags": {
+    "stablecoin": {
+      "name": "Stablecoin",
+      "description": "A token with value pegged to another asset"
+    },
+    "compound": {
+      "name": "Compound",
+      "description": "A token used in Compound Finance"
+    }
+  }
+}
+  ]
+}
